@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     EditText lemail,lpass;
     Button log,signup;
     FirebaseAuth Fauth;
+    TextView fgttxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         log=findViewById(R.id.login);
         signup=findViewById(R.id.signintnt);
         Fauth = FirebaseAuth.getInstance();
+        fgttxt = findViewById(R.id.frgttxt);
 
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -61,5 +64,16 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+    }
+
+    public void OnClick(View view) {
+
+        Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(getApplicationContext(),ForgotPassword.class));
+
+
+
     }
 }
