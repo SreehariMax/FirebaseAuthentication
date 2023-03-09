@@ -56,7 +56,7 @@ public class RegActivity extends AppCompatActivity {
                            fuser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                                @Override
                                public void onSuccess(Void unused) {
-                                   Toast.makeText(RegActivity.this, "Registerred Succesfully", Toast.LENGTH_SHORT).show();
+                                   Toast.makeText(RegActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                                }
                            }).addOnFailureListener(new OnFailureListener() {
                                @Override
@@ -65,7 +65,7 @@ public class RegActivity extends AppCompatActivity {
                                }
                            });
 
-                           Toast.makeText(RegActivity.this, "Register succesfuly", Toast.LENGTH_SHORT).show();
+                           Toast.makeText(RegActivity.this, "Register successfully", Toast.LENGTH_SHORT).show();
                            startActivity(new Intent(getApplicationContext(),Home.class));
 
                        }
