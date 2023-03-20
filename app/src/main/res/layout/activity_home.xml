@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".Home">
 
     <TextView
@@ -12,5 +14,12 @@
         android:text="Welcome,User!"
         android:gravity="center_horizontal"
         />
+
+
+    <Button
+        android:id="@+id/ver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Verify Phone Number" />
 
 </LinearLayout>
