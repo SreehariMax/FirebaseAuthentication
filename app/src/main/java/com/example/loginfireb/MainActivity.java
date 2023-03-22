@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     Button log,signup;
     FirebaseAuth Fauth;
     TextView fgttxt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         signup=findViewById(R.id.signintnt);
         Fauth = FirebaseAuth.getInstance();
         fgttxt = findViewById(R.id.frgttxt);
+
 
 
         signup.setOnClickListener(new View.OnClickListener() {

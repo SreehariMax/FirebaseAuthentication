@@ -52,6 +52,19 @@ public class OTPverification extends AppCompatActivity {
                 }
             }
         });
+
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (!sub.getText().toString().isEmpty()) {
+                    String cod = sub.getText().toString().trim();
+                    verifyCode(cod);
+
+                }
+            }
+        });
+
     }
 
             private void requestOTP(String phoneNum) {
@@ -92,6 +105,9 @@ public class OTPverification extends AppCompatActivity {
 
                 }
             };
+
+
+
 
             private void verifyCode(String code){
                 PhoneAuthCredential credential = PhoneAuthProvider.getCredential(varificationId,code);

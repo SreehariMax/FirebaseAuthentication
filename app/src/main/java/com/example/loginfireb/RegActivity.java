@@ -17,12 +17,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegActivity extends AppCompatActivity {
 
     EditText runame,remail,rpass1,rpass2;
     Button reg;
     FirebaseAuth  Fauth;
+    FirebaseFirestore fstore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,8 @@ public class RegActivity extends AppCompatActivity {
         rpass2=findViewById(R.id.regpass2);
         reg=findViewById(R.id.reg);
         Fauth = FirebaseAuth.getInstance();
+        fstore= FirebaseFirestore.getInstance();
+
 
        reg.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -57,6 +65,29 @@ public class RegActivity extends AppCompatActivity {
                                @Override
                                public void onSuccess(Void unused) {
                                    Toast.makeText(RegActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+//                                   String userId = Fauth.getCurrentUser().getUid();
+//
+//                                   DocumentReference documentReference = fstore.collection("user").document(userId);
+//                                   Map<String,Object> user = new HashMap<>();
+//                                   user.put("fullname",runame);
+//                                   user.put("email",remail);
+//
+//
+//                                   documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                       @Override
+//                                       public void onSuccess(Void unused) {
+//
+//                                           Toast.makeText(RegActivity.this, "Profile created", Toast.LENGTH_SHORT).show();
+//
+////                                           startActivity(new Intent(getApplicationContext(),Home.class));
+//
+//                                       }
+//                                   }).addOnFailureListener(new OnFailureListener() {
+//                                       @Override
+//                                       public void onFailure(@NonNull Exception e) {
+//                                           Toast.makeText(RegActivity.this, "Profile not created", Toast.LENGTH_SHORT).show();
+//                                       }
+//                                   });
                                }
                            }).addOnFailureListener(new OnFailureListener() {
                                @Override
@@ -65,11 +96,39 @@ public class RegActivity extends AppCompatActivity {
                                }
                            });
 
-                           Toast.makeText(RegActivity.this, "Register successfully", Toast.LENGTH_SHORT).show();
-                           startActivity(new Intent(getApplicationContext(),Home.class));
+
+
+
+
+//                           Toast.makeText(RegActivity.this, "Register successfully", Toast.LENGTH_SHORT).show();
+//                           startActivity(new Intent(getApplicationContext(),Home.class));
 
                        }
 
+                   }
+               });
+
+               String userId = Fauth.getCurrentUser().getUid();
+
+               DocumentReference documentReference = fstore.collection("user").document(userId);
+               Map<String,Object> user = new HashMap<>();
+               user.put("fullname",runame);
+               user.put("email",remail);
+
+
+               documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                   @Override
+                   public void onSuccess(Void unused) {
+
+                       Toast.makeText(RegActivity.this, "Profile created", Toast.LENGTH_SHORT).show();
+
+//                                           startActivity(new Intent(getApplicationContext(),Home.class));
+
+                   }
+               }).addOnFailureListener(new OnFailureListener() {
+                   @Override
+                   public void onFailure(@NonNull Exception e) {
+                       Toast.makeText(RegActivity.this, "Profile not created", Toast.LENGTH_SHORT).show();
                    }
                });
 
