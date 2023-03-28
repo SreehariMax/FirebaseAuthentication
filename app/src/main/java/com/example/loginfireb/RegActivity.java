@@ -29,6 +29,7 @@ public class RegActivity extends AppCompatActivity {
     Button reg;
     FirebaseAuth  Fauth;
     FirebaseFirestore fstore;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,39 +97,35 @@ public class RegActivity extends AppCompatActivity {
                                }
                            });
 
+                           userId = Fauth.getCurrentUser().getUid();
+
+                           DocumentReference documentReference = fstore.collection("user").document(userId);
+                           Map<String,Object> user = new HashMap<>();
+                           user.put("fullname",username);
+                           user.put("email",email);
 
 
+                           documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                               @Override
+                               public void onSuccess(Void unused) {
 
+                                   Toast.makeText(RegActivity.this, "Profile created", Toast.LENGTH_SHORT).show();
+
+//                                           startActivity(new Intent(getApplicationContext(),Home.class));
+
+                               }
+                           }).addOnFailureListener(new OnFailureListener() {
+                               @Override
+                               public void onFailure(@NonNull Exception e) {
+                                   Toast.makeText(RegActivity.this, "Profile not created", Toast.LENGTH_SHORT).show();
+                               }
+                           });
 
 //                           Toast.makeText(RegActivity.this, "Register successfully", Toast.LENGTH_SHORT).show();
 //                           startActivity(new Intent(getApplicationContext(),Home.class));
 
                        }
 
-                   }
-               });
-
-               String userId = Fauth.getCurrentUser().getUid();
-
-               DocumentReference documentReference = fstore.collection("user").document(userId);
-               Map<String,Object> user = new HashMap<>();
-               user.put("fullname",runame);
-               user.put("email",remail);
-
-
-               documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                   @Override
-                   public void onSuccess(Void unused) {
-
-                       Toast.makeText(RegActivity.this, "Profile created", Toast.LENGTH_SHORT).show();
-
-//                                           startActivity(new Intent(getApplicationContext(),Home.class));
-
-                   }
-               }).addOnFailureListener(new OnFailureListener() {
-                   @Override
-                   public void onFailure(@NonNull Exception e) {
-                       Toast.makeText(RegActivity.this, "Profile not created", Toast.LENGTH_SHORT).show();
                    }
                });
 
